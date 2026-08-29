@@ -1,10 +1,10 @@
 import { motion, Variants } from 'framer-motion';
 
 const missions = [
-  { id: '01', title: 'Advancing Technology', desc: 'Foster technological innovation and excellence in the advancement of humanity.' },
-  { id: '02', title: 'Contribution to Science', desc: 'Contribute expanding scientific knowledge through continuous research and development.' },
+  { id: '01', title: 'Advancing Technology', desc: 'Fostering technological innovation and excellence in the advancement of humanity.' },
+  { id: '02', title: 'Contribution to Science', desc: 'Contributing to expanding scientific knowledge through continuous research and development.' },
   { id: '03', title: 'Humanitarian Activities', desc: 'Empower society through impactful humanitarian initiatives and community support.' },
-  { id: '04', title: 'Women in Engineering', desc: 'Inspire women to pursue their academic interests and excel in their technology careers.' },
+  { id: '04', title: 'Women in Engineering', desc: 'Inspiring women to pursue their academic interests and excel in their technology careers.' },
   { id: '05', title: 'Happiness of Volunteering', desc: 'Promote engaging and fulfilling volunteering activities within our community groups.' },
   { id: '06', title: 'Ethics & Social Implications', desc: 'Advocate for ethical behavior and the responsible, sustainable use of technology.' },
   { id: '07', title: 'Skill Development', desc: 'Equip individuals with versatile, practical skills to ensure they are job-ready.' },

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 import { fetchAllExecomMembers, ExecomMember } from "../data/execom";
 
 export default function ExecomDirectory() {
@@ -102,14 +103,24 @@ export default function ExecomDirectory() {
                             <span className="text-6xl font-black font-heading">IEEE</span>
                           </div>
 
-                          {/* Image Placeholder with ring effect */}
+                          {/* Member photo with ring effect */}
                           <div className="relative mb-8">
-                            <div className="w-28 h-28 rounded-full bg-ieee-white border-2 border-ieee-black/5 shadow-inner flex items-center justify-center relative z-10 group-hover:border-ieee-blue/20 transition-colors">
-                              <div className="w-24 h-24 rounded-full bg-gradient-to-br from-ieee-blue/5 to-ieee-blue/20 flex items-center justify-center">
-                                <span className="text-3xl font-bold text-ieee-blue tracking-tighter">
-                                  {member.name.split(' ').map(n => n[0]).join('')}
-                                </span>
-                              </div>
+                            <div className="relative z-10 flex h-32 w-32 items-center justify-center overflow-hidden rounded-full border-2 border-ieee-black/5 bg-ieee-white shadow-inner transition-colors group-hover:border-ieee-blue/20">
+                              {member.imageUrl ? (
+                                <Image
+                                  src={member.imageUrl}
+                                  alt={`${member.name} profile`}
+                                  fill
+                                  sizes="128px"
+                                  className="rounded-full object-cover"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-ieee-blue/5 to-ieee-blue/20">
+                                  <span className="text-3xl font-bold tracking-tighter text-ieee-blue">
+                                    {member.name.split(' ').map(n => n[0]).join('')}
+                                  </span>
+                                </div>
+                              )}
                             </div>
                             {/* Decorative ring */}
                             <div className="absolute inset-0 rounded-full border border-ieee-blue/20 scale-110 group-hover:scale-125 opacity-0 group-hover:opacity-100 transition-all duration-500" />

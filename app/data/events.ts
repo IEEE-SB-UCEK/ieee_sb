@@ -1,5 +1,6 @@
 export interface IeeeEvent {
   id: string;
+  link: string | null;
   title: string;
   date: string;
   location: string;
@@ -16,6 +17,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
   return [
     {
       id: "evt-1",
+      link: "",
       title: "Tech Innovation Summit 2026",
       date: "April 20, 2026",
       location: "Main Auditorium, UCEK",
@@ -24,6 +26,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
     },
     {
       id: "evt-2",
+      link: "",
       title: "AI & Machine Learning Bootcamp",
       date: "March 15, 2026",
       location: "Computer Lab 1",
@@ -32,6 +35,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
     },
     {
       id: "evt-3",
+      link: "",
       title: "Code To Compile Hackathon",
       date: "February 28, 2026",
       location: "ECE Seminar Hall",
@@ -40,6 +44,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
     },
     {
       id: "evt-4",
+      link: "/events",
       title: "Cyber Resilience Workshop",
       date: "January 14, 2026",
       location: "IT Block Labs",
@@ -48,6 +53,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
     },
     {
       id: "evt-5",
+      link: "",
       title: "Women in Engineering Symposium",
       date: "November 10, 2025",
       location: "Main Auditorium, UCEK",
@@ -56,6 +62,7 @@ export const fetchLatestEvents = async (): Promise<IeeeEvent[]> => {
     },
     {
       id: "evt-6",
+      link: "/events",
       title: "Web Development Masterclass",
       date: "October 05, 2025",
       location: "Virtual (Teams)",

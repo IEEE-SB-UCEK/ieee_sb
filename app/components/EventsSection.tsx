@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchLatestEvents, IeeeEvent } from "../data/events";
+
+function EventCardContainer({ className, children }: { className: string; children: ReactNode }) {
+  return <div className={className}>{children}</div>;
+}
 
 export default function EventsSection() {
   const [events, setEvents] = useState<IeeeEvent[]>([]);
@@ -36,6 +40,8 @@ export default function EventsSection() {
   }
 
   if (!events || events.length === 0) return null;
+
+  const visibleEvents = [...events.slice(-3)].reverse();
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -96,14 +102,15 @@ export default function EventsSection() {
         >
           
           {/* Featured Event (Index 0) */}
-          <motion.div 
-            variants={itemVariants}
-            className="lg:col-span-7 group relative overflow-hidden rounded-[2rem] bg-ieee-white border border-ieee-black/10 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer min-h-[400px] md:min-h-[500px]"
-          >
+          <EventCardContainer className="lg:col-span-7 block">
+            <motion.div 
+              variants={itemVariants}
+              className="group relative overflow-hidden rounded-[2rem] bg-ieee-white border border-ieee-black/10 shadow-xl hover:shadow-2xl transition-all duration-500 cursor-pointer min-h-[400px] md:min-h-[500px]"
+            >
             <div className="absolute inset-0">
               <Image 
-                src={events[0].posterSrc} 
-                alt={events[0].title}
+                src={visibleEvents[0].posterSrc} 
+                alt={visibleEvents[0].title}
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
@@ -112,32 +119,38 @@ export default function EventsSection() {
             
             <div className="absolute bottom-0 left-0 w-full p-8 md:p-12 flex flex-col justify-end h-full">
               <div className="inline-block px-4 py-1.5 bg-ieee-blue text-ieee-white text-sm font-semibold rounded-full w-fit mb-4">
-                {events[0].date}
+                {visibleEvents[0].date}
               </div>
               <h3 className="text-2xl md:text-4xl font-bold text-ieee-white mb-3">
-                {events[0].title}
+                {visibleEvents[0].title}
               </h3>
               <p className="text-ieee-white/80 line-clamp-2 mb-4 md:mb-6 max-w-xl">
-                {events[0].description}
+                {visibleEvents[0].description}
               </p>
               <div className="flex items-center text-ieee-white/90 text-sm font-medium">
                 <svg className="w-5 h-5 mr-2 text-ieee-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                {events[0].location}
+                {visibleEvents[0].location}
               </div>
+              {visibleEvents[0].link && (
+                <Link href={visibleEvents[0].link} className="mt-5 inline-flex w-fit self-start items-center rounded-full bg-ieee-blue px-5 py-2.5 text-sm font-semibold text-ieee-white transition-colors hover:bg-ieee-blue/80">
+                  Register
+                </Link>
+              )}
             </div>
-          </motion.div>
+            </motion.div>
+          </EventCardContainer>
 
           {/* Secondary Events Stack (Index 1 & 2) */}
           <div className="lg:col-span-5 flex flex-col gap-6">
-            {events.slice(1, 3).map((event: IeeeEvent) => (
-              <motion.div 
-                key={event.id} 
-                variants={itemVariants}
-                className="group relative flex flex-col sm:flex-row bg-ieee-white border border-ieee-black/10 rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
-              >
+            {visibleEvents.slice(1).map((event: IeeeEvent) => (
+              <EventCardContainer key={event.id} className="block h-full">
+                <motion.div 
+                  variants={itemVariants}
+                  className="group relative flex flex-col sm:flex-row bg-ieee-white border border-ieee-black/10 rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                >
                 
                 {/* Image Container */}
                 <div className="relative w-full h-[250px] sm:h-auto sm:w-2/5 overflow-hidden shrink-0">
@@ -165,8 +178,14 @@ export default function EventsSection() {
                     </svg>
                     {event.location}
                   </div>
+                  {event.link && (
+                    <Link href={event.link} className="mt-4 inline-flex w-fit self-start rounded-full bg-ieee-blue px-4 py-2 text-sm font-semibold text-ieee-white transition-colors hover:bg-ieee-blue/80">
+                      Register
+                    </Link>
+                  )}
                 </div>
-              </motion.div>
+                </motion.div>
+              </EventCardContainer>
             ))}
           </div>
 

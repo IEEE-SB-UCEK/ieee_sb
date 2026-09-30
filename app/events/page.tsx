@@ -80,11 +80,11 @@ export default function EventsPage() {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-            {events.map((event) => (
+            {[...events].reverse().map((event) => (
               <motion.div 
                 key={event.id} 
                 variants={itemVariants}
-                className="group relative flex flex-col bg-ieee-white border border-ieee-black/10 rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer h-full"
+                className="group relative flex flex-col bg-ieee-white border border-ieee-black/10 rounded-[1.5rem] shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden h-full"
               >
                 
                 {/* Image Container */}
@@ -115,6 +115,11 @@ export default function EventsPage() {
                     </svg>
                     {event.location}
                   </div>
+                  {event.link && (
+                    <Link href={event.link} className="mt-4 inline-flex w-fit rounded-full bg-ieee-blue px-4 py-2 text-sm font-semibold text-ieee-white transition-colors hover:bg-ieee-blue/80">
+                      Register
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             ))}

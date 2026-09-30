@@ -24,6 +24,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Chairperson",
     team: "Core Committee",
     memberId: "IEEE-9021-X",
+    imageUrl: "/bg.jpg",
     socials: { linkedin: "https://linkedin.com", email: "alex@ieee.org" }
   },
   {
@@ -32,6 +33,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Secretary",
     team: "Core Committee",
     memberId: "IEEE-9022-X",
+    imageUrl: "/bg.jpg",
     socials: { linkedin: "https://linkedin.com" }
   },
   {
@@ -40,6 +42,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Vice Chair",
     team: "Core Committee",
     memberId: "IEEE-9023-X",
+    imageUrl: "/bg.jpg",
     socials: { linkedin: "https://linkedin.com", github: "https://github.com" }
   },
   // Tech Team
@@ -49,6 +52,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Tech Team Head",
     team: "Technical Team",
     memberId: "IEEE-8011-T",
+    imageUrl: "/bg.jpg",
     socials: { github: "https://github.com", linkedin: "https://linkedin.com" }
   },
   {
@@ -57,6 +61,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Lead Developer",
     team: "Technical Team",
     memberId: "IEEE-8012-T",
+    imageUrl: "/bg.jpg",
     socials: { github: "https://github.com" }
   },
   // Operations Team
@@ -66,6 +71,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Operations Head",
     team: "Operations Team",
     memberId: "IEEE-7011-O",
+    imageUrl: "/bg.jpg",
     socials: { linkedin: "https://linkedin.com", instagram: "https://instagram.com" }
   },
   // Content Team
@@ -75,6 +81,7 @@ const EXECOM_MOCK_DATA: ExecomMember[] = [
     role: "Content Lead",
     team: "Content Team",
     memberId: "IEEE-6011-C",
+    imageUrl: "/bg.jpg",
     socials: { instagram: "https://instagram.com", linkedin: "https://linkedin.com" }
   }
 ];

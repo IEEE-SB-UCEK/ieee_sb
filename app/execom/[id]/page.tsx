@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion, Variants } from "framer-motion";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import { fetchMemberById, ExecomMember } from "../../data/execom";
 
 export default function DigitalIdCard() {
@@ -12,6 +13,7 @@ export default function DigitalIdCard() {
 
   const [member, setMember] = useState<ExecomMember | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isImageOpen, setIsImageOpen] = useState(false);
 
   useEffect(() => {
     if (!id) return;
@@ -88,7 +90,7 @@ export default function DigitalIdCard() {
         initial="hidden"
         animate="visible"
         className="w-full relative"
-        style={{ paddingTop: "52px" }}
+        style={{ paddingTop: "68px" }}
       >
         {/* Floating avatar */}
         <motion.div
@@ -97,17 +99,33 @@ export default function DigitalIdCard() {
           transition={{ delay: 0.35, type: "spring", stiffness: 260, damping: 20 }}
           className="absolute top-0 left-1/2 -translate-x-1/2 z-20"
         >
-          <div className="w-[104px] h-[104px] rounded-full border-[5px] border-ieee-white bg-ieee-black shadow-xl overflow-hidden flex items-center justify-center">
-            <div className="w-full h-full bg-gradient-to-br from-ieee-blue/30 to-ieee-blue/60 flex items-center justify-center">
-              <span className="text-4xl font-black text-ieee-white drop-shadow">
-                {member.name.split(' ').map(n => n[0]).join('')}
-              </span>
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => member.imageUrl && setIsImageOpen(true)}
+            disabled={!member.imageUrl}
+            aria-label={member.imageUrl ? `Enlarge ${member.name}'s photo` : undefined}
+            className="relative w-[128px] h-[128px] rounded-full border-[5px] border-ieee-white bg-ieee-black shadow-xl overflow-hidden flex items-center justify-center disabled:cursor-default"
+          >
+            {member.imageUrl ? (
+              <Image
+                src={member.imageUrl}
+                alt={`${member.name} profile`}
+                fill
+                sizes="128px"
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <div className="w-full h-full bg-gradient-to-br from-ieee-blue/30 to-ieee-blue/60 flex items-center justify-center">
+                <span className="text-4xl font-black text-ieee-white drop-shadow">
+                  {member.name.split(' ').map(n => n[0]).join('')}
+                </span>
+              </div>
+            )}
+          </button>
         </motion.div>
 
         {/* White top section */}
-        <div className="bg-ieee-white rounded-t-[2rem] pt-16 pb-6 px-6">
+        <div className="bg-ieee-white rounded-t-[2rem] pt-20 pb-6 px-6">
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-3xl font-black text-ieee-black leading-tight font-heading">
@@ -207,6 +225,34 @@ export default function DigitalIdCard() {
         </div>
       </motion.div>
     </div>
+
+    {isImageOpen && member.imageUrl && (
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${member.name} enlarged photo`}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-ieee-black/90 p-6"
+        onClick={() => setIsImageOpen(false)}
+      >
+        <button
+          type="button"
+          aria-label="Close enlarged photo"
+          onClick={() => setIsImageOpen(false)}
+          className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full bg-ieee-white/15 text-2xl text-ieee-white transition-colors hover:bg-ieee-white/30"
+        >
+          &times;
+        </button>
+        <div className="relative h-[min(78vw,560px)] w-[min(78vw,560px)] overflow-hidden rounded-full border-4 border-ieee-white shadow-2xl" onClick={(event) => event.stopPropagation()}>
+          <Image
+            src={member.imageUrl}
+            alt={`${member.name} enlarged profile`}
+            fill
+            sizes="(max-width: 640px) 78vw, 560px"
+            className="object-cover"
+          />
+        </div>
+      </div>
+    )}
   </div>
 
 );}

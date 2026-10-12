@@ -18,7 +18,7 @@ export default function ExecomDirectory() {
     loadMembers();
   }, []);
 
-  const teams = ['Core Committee', 'Technical Team', 'Operations Team', 'Content Team'];
+  const teams = ['HQ','Technical Team', 'Operations Team', 'Content Team', 'MD & Marketing Team', 'Creative Team', 'Media Team'];
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

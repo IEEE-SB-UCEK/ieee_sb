@@ -34,10 +34,10 @@ export default function DigitalIdCard() {
   if (!member) {
     return (
       <div className="min-h-screen bg-ieee-black flex flex-col items-center justify-center text-center p-6">
-        <h1 className="text-4xl text-ieee-white font-bold mb-4">ID Card Invalid</h1>
-        <p className="text-ieee-white/60 mb-8">The digital credential you are looking for does not exist or has expired.</p>
+        <h1 className="text-4xl text-ieee-white font-bold mb-4">OOPS, ID Card Invalid</h1>
+        <p className="text-ieee-white/60 mb-8">Seems like the person you are looking for is not in our directory perhaps you can try verifying the ID </p>
         <Link href="/execom" className="px-6 py-2 bg-ieee-blue text-ieee-white rounded-full font-bold">
-          Return to Directory
+          Return to execom Directory
         </Link>
       </div>
     );
@@ -65,15 +65,15 @@ export default function DigitalIdCard() {
 
   return (
   
-  <div className="min-h-screen bg-ieee-black pt-24 pb-20 px-4 md:px-8 flex items-center justify-center overflow-hidden relative">
+  <div className="min-h-screen bg-ieee-black pt-8 pb-10 px-4 md:px-6 flex items-center justify-center overflow-hidden relative">
     <div className="absolute inset-0 pointer-events-none">
-      <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-ieee-blue rounded-full blur-[150px] opacity-10" />
-      <div className="absolute bottom-[-10%] left-[-5%] w-[400px] h-[400px] bg-ieee-blue rounded-full blur-[120px] opacity-10" />
+      <div className="absolute top-[-10%] right-[-5%] w-[420px] h-[420px] bg-ieee-blue rounded-full blur-[120px] opacity-10" />
+      <div className="absolute bottom-[-10%] left-[-5%] w-[320px] h-[320px] bg-ieee-blue rounded-full blur-[100px] opacity-10" />
     </div>
 
-    <div className="max-w-sm w-full relative z-10 flex flex-col items-center">
+    <div className="max-w-[340px] w-full relative z-10 flex flex-col items-center">
       {/* Back link */}
-      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="self-start mb-8">
+      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} className="self-start mb-5">
         <Link href="/execom" className="inline-flex items-center text-ieee-white/60 hover:text-ieee-white transition-colors text-sm font-medium">
           <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -88,7 +88,7 @@ export default function DigitalIdCard() {
         initial="hidden"
         animate="visible"
         className="w-full relative"
-        style={{ paddingTop: "52px" }}
+        style={{ paddingTop: "42px" }}
       >
         {/* Floating avatar */}
         <motion.div
@@ -97,9 +97,9 @@ export default function DigitalIdCard() {
           transition={{ delay: 0.35, type: "spring", stiffness: 260, damping: 20 }}
           className="absolute top-0 left-1/2 -translate-x-1/2 z-20"
         >
-          <div className="w-[104px] h-[104px] rounded-full border-[5px] border-ieee-white bg-ieee-black shadow-xl overflow-hidden flex items-center justify-center">
+          <div className="w-[92px] h-[92px] rounded-full border-[4px] border-ieee-white bg-ieee-black shadow-xl overflow-hidden flex items-center justify-center">
             <div className="w-full h-full bg-gradient-to-br from-ieee-blue/30 to-ieee-blue/60 flex items-center justify-center">
-              <span className="text-4xl font-black text-ieee-white drop-shadow">
+              <span className="text-3xl font-black text-ieee-white drop-shadow">
                 {member.name.split(' ').map(n => n[0]).join('')}
               </span>
             </div>
@@ -107,7 +107,7 @@ export default function DigitalIdCard() {
         </motion.div>
 
         {/* White top section */}
-        <div className="bg-ieee-white rounded-t-[2rem] pt-16 pb-6 px-6">
+        <div className="bg-ieee-white rounded-t-[2rem] pt-14 pb-5 px-5">
           <div className="flex justify-between items-start">
             <div>
               <h1 className="text-3xl font-black text-ieee-black leading-tight font-heading">
@@ -124,19 +124,22 @@ export default function DigitalIdCard() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               </div>
-              <span className="text-ieee-black/40 text-[9px] font-black uppercase tracking-tight">IEEE SB 2024</span>
+              <span className="text-ieee-black/40 text-[9px] font-black uppercase tracking-tight">IEEE SB 2026</span>
             </div>
           </div>
         </div>
 
         {/* Blue bottom section */}
-        <div className="bg-ieee-blue rounded-b-[2rem] px-6 pt-4 pb-7">
+        <div className="bg-ieee-blue rounded-b-[2rem] px-5 pt-3 pb-5">
           {/* Avatars + actions row */}
-          <div className="flex items-center gap-2 mb-5">
-            {Object.keys(member.socials).slice(0, 3).map((key, i) => (
+          <div className="flex items-center gap-2 mb-4">
+            {Object.entries(member.socials)
+              .filter(([key]) => key !== "email")
+              .slice(0, 3)
+              .map(([key, url], i) => (
               <motion.a
                 key={key}
-                href={(member.socials as any)[key]} target="_blank" rel="noopener noreferrer"
+                href={url} target="_blank" rel="noopener noreferrer"
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 transition={{ delay: 0.7 + i * 0.08, type: "spring", stiffness: 220 }}
@@ -173,7 +176,7 @@ export default function DigitalIdCard() {
           <h2 className="text-ieee-white text-xl font-black font-heading mb-5">Digital ID</h2>
 
           {/* QR + details */}
-          <div className="grid grid-cols-2 gap-4 items-start">
+          <div className="grid grid-cols-2 gap-3 items-start">
             <div className="bg-ieee-white rounded-2xl p-3 aspect-square flex items-center justify-center">
               <svg className="w-full h-full text-ieee-black" viewBox="0 0 100 100">
                 <path fill="currentColor" d="M10,10 h30 v30 h-30 z M15,15 h20 v20 h-20 z M22,22 h6 v6 h-6 z M60,10 h30 v30 h-30 z M65,15 h20 v20 h-20 z M72,22 h6 v6 h-6 z M10,60 h30 v30 h-30 z M15,65 h20 v20 h-20 z M22,72 h6 v6 h-6 z M45,10 h10 v10 h-10 z M45,30 h10 v10 h-10 z M60,45 h10 v10 h-10 z M10,45 h10 v10 h-10 z M75,45 h15 v10 h-15 z M45,60 h10 v30 h-10 z M60,60 h10 v10 h-10 z M75,60 h15 v15 h-15 z M60,80 h30 v10 h-30 z" />
@@ -197,8 +200,8 @@ export default function DigitalIdCard() {
           </div>
 
           {/* Footer */}
-          <div className="mt-5 pt-4 border-t border-ieee-white/10 flex justify-between items-center">
-            <p className="text-ieee-white/30 text-[8px] font-black uppercase tracking-[0.3em]">IEEE SB UCEK 2024</p>
+          <div className="mt-4 pt-3 border-t border-ieee-white/10 flex justify-between items-center">
+            <p className="text-ieee-white/30 text-[8px] font-black uppercase tracking-[0.3em]">IEEE SB UCEK 2026</p>
             <div className="flex items-center gap-1.5 bg-ieee-white/10 rounded-full px-3 py-1">
               <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
               <span className="text-ieee-white/70 text-[8px] font-bold uppercase tracking-wide">Verified</span>

@@ -30,7 +30,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section className="bg-ieee-white py-24 lg:py-32 relative text-ieee-black z-20">
+    <section id="about-us" className="bg-ieee-white py-24 lg:py-32 relative text-ieee-black z-20">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
         {/* Intro & Vision Split */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-20 items-stretch overflow-hidden">

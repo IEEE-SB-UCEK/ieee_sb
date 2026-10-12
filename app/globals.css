@@ -6,21 +6,31 @@
   --color-ieee-blue: var(--ieee-blue);
   --color-ieee-black: var(--ieee-black);
   --color-ieee-white: var(--ieee-white);
+  --color-ieee-button: var(--ieee-button-bg);
 }
 
-/* IEEE Brand Colors */
+/* Updated website color system */
 :root {
-  --ieee-blue: rgb(0 115 174);    /* Pantone 3015 C / RGB (0, 181, 226) */
-  --ieee-black: #000000;   /* Standard Black */
-  --ieee-white: #FFFFFF;   /* Standard White */
+  --ieee-blue: #2564ebe1;       /* shared brand accent */
+  --ieee-black: #0f172a;      /* deep midnight navy */
+  --ieee-white: #f4f6fb;      /* soft off-white */
+  --ieee-surface: #f0e2e2;    /* cool neutral panels */
+  --ieee-button-bg: #2567e2e1; /* dedicated explore button background */
 }
 
 body {
   font-family: var(--font-sans);
+  background: var(--ieee-white);
+  color: var(--ieee-black);
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: var(--ieee-black);
 }
 
 .ieee-blue {
@@ -45,4 +55,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-ieee-white {
   background-color: var(--ieee-white);
+}
+
+.bg-ieee-surface {
+  background-color: var(--ieee-surface);
+}
+
+.bg-ieee-button {
+  background-color: var(--ieee-button-bg);
 }

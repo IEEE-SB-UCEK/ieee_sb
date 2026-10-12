@@ -11,7 +11,7 @@ const Page = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1.5 }}
-        className="sticky top-0 w-full h-screen overflow-hidden bg-ieee-black font-sans -z-10"
+        className="sticky top-0 z-10 w-full h-screen overflow-hidden bg-ieee-black font-sans relative"
       >
           
           {/* Background Decorative Layer */}
@@ -108,15 +108,17 @@ const Page = () => {
               transition={{ duration: 0.8, delay: 1.2 }}
               className="mt-8 flex flex-wrap gap-4 justify-center"
             >
-              <button 
-                className="px-8 py-3.5 rounded-full font-semibold text-ieee-white transition-all active:scale-95 hover:brightness-110 shadow-lg shadow-ieee-blue/20 bg-ieee-blue cursor-pointer"
+              <button
+                id="explore_ieee_uce"
+                onClick={() => {
+                  document.getElementById("about-us")?.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start",
+                  });
+                }}
+                className="px-8 py-3.5 rounded-full font-semibold text-ieee-white transition-all active:scale-95 hover:brightness-110 shadow-lg shadow-ieee-blue/20 bg-ieee-button cursor-pointer"
               >
-                Join the Community
-              </button>
-              <button 
-                className="px-8 py-3.5 rounded-full font-semibold text-ieee-white transition-all active:scale-95 hover:bg-ieee-white/10 border border-ieee-white/20 cursor-pointer"
-              >
-                Discover Events
+                Explore IEEE UCEK
               </button>
             </motion.div>
 
